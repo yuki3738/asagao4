@@ -13,4 +13,15 @@ class ArticlesControllerTest < ActionController::TestCase
     get :show, id: article
     assert_response :success
   end
+
+  test "new" do
+    get :new
+    assert_response :success
+  end
+
+  test "edit" do
+    article = FactoryGirl.create(:article)
+    get :edit, id: article
+    assert_response :success
+  end
 end
