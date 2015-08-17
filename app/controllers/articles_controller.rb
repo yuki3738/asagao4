@@ -1,10 +1,12 @@
 class ArticlesController < ApplicationController
+  before_action :loginrequired, except: [:index, :show]
+
   def index
-    @articles = Article.order(released_at: :desc)
+    @articles = Article.readable_for(current_member).der(released_at: :desc)
   end
 
   def show
-    @article = Article.find(params[:id])
+    @article = Article.readable_for(current_member).find(params[:id])
   end
 
   def new
